@@ -1,2 +1,2 @@
-# -*- coding: utf-8 -*-
+"""Function to solve the onedimensional time-independent Schroedinger equation"""
 

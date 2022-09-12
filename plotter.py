@@ -1,2 +1,1 @@
-# -*- coding: utf-8 -*-
-
+"""package to plott the arrays and save files"""

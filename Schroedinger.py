@@ -1,2 +1,1 @@
-# -*- coding: utf-8 -*-
-
+"""Package to introduce parameters and create array for plotting"""
