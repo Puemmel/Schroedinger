@@ -67,7 +67,4 @@ def interpol():
     f2.close()    
     
     
-    
-    plt.plot(potxpoints, potpoints, '-')
-    plt.show()
-
+   
