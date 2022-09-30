@@ -41,7 +41,3 @@ plt.plot(xe,ye, "*m")
 plt.xlabel("[Bohr]")
 plt.grid(axis = 'y', color = 'grey', linestyle = '-', linewidth = 0.5)
 plt.show()
-
-
-    
-
