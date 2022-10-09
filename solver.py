@@ -26,58 +26,63 @@ def schroedinger_solver():
     f.close() 
     
     
+    #def some constants and trimatrix diagonals
+    
     m = float(inp[0][0])
     delta = (float(inp[1][1]) - float(inp[1][0]))/int(inp[1][2])    
     n = int(inp[1][2])
     a = 1/(m*delta**2)
-
+    
+    
+    
     diag = np.empty(n, dtype = float)
     offdiag = np.full(n-1, -0.5*a)
     
-    f2 = open("potential.dat", "r")
+    
+    f1 = open("potential.dat", "r")
     inppot = []
-    for y in f2:
+    for y in f1:
         inppot.append(y.split())
-    f2.close() 
+    f1.close()
     
     for i in range(n):
-        diag[i] = inppot[i][1]
+        inppot[i][0] = float(inppot[i][0])
+        inppot[i][1] = float(inppot[i][1])
+    
+    
+    for i in range(n):
+        diag[i] = inppot[i][1] + a
+    
+    #Calculate eigenvalues and normed eigenvectormatrix in an array
     
     eigenvalues,eigenvectormatrix = linalg.eigh_tridiagonal(diag, offdiag)
+    
+    
+    
     
     x = np.linspace(float(inp[1][0]), float(inp[1][1]), int(inp[1][2]))
     d = [[] for x in range(int(inp[2][0]),int(inp[2][1]) + 1)]
     
     
+    abssquaremat = abs(eigenvectormatrix)**2
+    redsquamat = np.empty((n,len(d)), dtype=(float))
     
-
-    quamatrix = np.empty((n, n))
-    for j in range(n):
-        for i in range(n):
-            quamatrix[j][i] = (abs(eigenvectormatrix[j][i])**2)
-
-    normmat = np.sum(quamatrix, axis=1)
-    
-
-
     for j in range(len(d)):
         for i in range(n):
-            d[j].append(delta/(normmat[j]) * eigenvectormatrix[i][j])
+            redsquamat[i][j] = abssquaremat[i][j]
+
+    
+
+    normat = np.sum(redsquamat, axis=0) * delta
+  
+    for j in range(len(d)):
+        for i in range(n):
+            d[j].append(eigenvectormatrix[i][j]/math.sqrt(normat[j]))
    
     
-    
-    
-    
-    
-    
-    wavexpoints = []
-    for i in x:
-        wavexpoints.append(i)
-    
-    
     f2 = open("wavefuncs.dat", "w")
-    for i in range(len(wavexpoints)):
-        f2.write(str(wavexpoints[i]))
+    for i in range(len(x)):
+        f2.write(str(x[i]))
         for j in range(len(d)):
             f2.write(" ")
             f2.write(str(d[j][i]))
@@ -85,20 +90,21 @@ def schroedinger_solver():
     f2.close()
     
     
+     
     
+    for i in range(len(d)):    
+        plt.plot(x, d[i])
+    plt.show()
     
     
     
     f3 = open("energies.dat", "w")
-    for i in range(int(inp[2][0]),int(inp[2][1]) + 1):
+    for i in range(int(inp[2][0]) - 1,int(inp[2][1])):
         f3.write(str(eigenvalues[i]))
         f3.write("\n")
     f3.close()
     
-    
-    
-    
-    
+
     
     
     # calculate ortsop and sigma
@@ -108,27 +114,26 @@ def schroedinger_solver():
     
     for j in range(len(d)):
         for i in range(n):
-            k = d[j][i] * wavexpoints[i] * d[j][i] 
+            k = d[j][i] * x[i] * d[j][i] 
+            l = d[j][i] * (x[i])**2 * d[j][i] 
+            expxx[j].append(l)
             expx[j].append(k)
-            
     
-    for j in range(len(d)):
-        for i in range(n):
-            k = d[j][i] * (wavexpoints[i])**2 * d[j][i] 
-            expxx[j].append(k)
+    
+    
+    
 
     for j in range(len(d)):
         expx[j] = delta * sum(expx[j])
         expxx[j] = delta * sum(expxx[j])
    
-    
    
     sigma = []
     for i in range(len(expx)):
         sigma.append(math.sqrt(expxx[i] - (expx[i])**2))
     
-    
-    
+    print(sigma) 
+
     
     
     f4 = open("expvalues.dat", "w")
@@ -138,4 +143,4 @@ def schroedinger_solver():
     f4.close()
     
     
-    
+  
