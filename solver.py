@@ -57,9 +57,7 @@ def schroedinger_solver():
     
     eigenvalues,eigenvectormatrix = linalg.eigh_tridiagonal(diag, offdiag)
     
-    
-    
-    
+   
     x = np.linspace(float(inp[1][0]), float(inp[1][1]), int(inp[1][2]))
     d = [[] for x in range(int(inp[2][0]),int(inp[2][1]) + 1)]
     
@@ -88,14 +86,7 @@ def schroedinger_solver():
             f2.write(str(d[j][i]))
         f2.write("\n")
     f2.close()
-    
-    
-     
-    
-    for i in range(len(d)):    
-        plt.plot(x, d[i])
-    plt.show()
-    
+         
     
     
     f3 = open("energies.dat", "w")
@@ -105,7 +96,6 @@ def schroedinger_solver():
     f3.close()
     
 
-    
     
     # calculate ortsop and sigma
     
@@ -118,10 +108,7 @@ def schroedinger_solver():
             l = d[j][i] * (x[i])**2 * d[j][i] 
             expxx[j].append(l)
             expx[j].append(k)
-    
-    
-    
-    
+        
 
     for j in range(len(d)):
         expx[j] = delta * sum(expx[j])
@@ -132,13 +119,13 @@ def schroedinger_solver():
     for i in range(len(expx)):
         sigma.append(math.sqrt(expxx[i] - (expx[i])**2))
     
-    print(sigma) 
 
-    
-    
+    #first sigma then x op. value
     f4 = open("expvalues.dat", "w")
     for i in range(len(sigma)):
         f4.write(str(sigma[i]))
+        f4.write(" ")
+        f4.write(str(expx[i]))
         f4.write("\n")
     f4.close()
     
