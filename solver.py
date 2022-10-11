@@ -5,8 +5,6 @@ from scipy import linalg
 import scipy.interpolate as interpolate
 import math
 
- 
-
 def schroedinger_solver():
     """
     solves the schroedinger equation with the interpolated potential via eigenvalue problem.
@@ -94,8 +92,6 @@ def schroedinger_solver():
         f3.write(str(eigenvalues[i]))
         f3.write("\n")
     f3.close()
-    
-
     
     # calculate ortsop and sigma
     
