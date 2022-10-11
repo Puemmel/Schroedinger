@@ -1,1 +1,0 @@
-"""Package to introduce parameters and create array for plotting"""
