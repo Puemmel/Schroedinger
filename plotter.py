@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def visualizer():
+def visualizer(arg=None):
     """
     plot
 

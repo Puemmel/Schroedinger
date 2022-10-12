@@ -1,11 +1,8 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import os
 from scipy import linalg
-import scipy.interpolate as interpolate
 import math
 
-def schroedinger_solver():
+def schroedinger_solver(arg=None):
     """
     solves the schroedinger equation with the interpolated potential via eigenvalue problem.
     

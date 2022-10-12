@@ -1,10 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import os
-from scipy import linalg
 import scipy.interpolate as interpolate
 
-def interpol():
+def interpol(arg=None):
     """
     opens schroedinger.inp and interpolates the given Potential
     saves the calculated xy points in potential.dat
