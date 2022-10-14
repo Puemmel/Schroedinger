@@ -78,12 +78,15 @@ def visualizer(arg=None):
     plt.plot(inpwav[:,0], potlist)
     for i in range(len(inpwav[0]) - 1):
         plt.plot(inpwav[:,0], ampl*inpwav[:,i+1] + energieslist[i])
-        #plt.plot(inpwav[:,0], energieslist[i])
-        
+    
+    for i in range(len(inpexp)):
+        plt.plot(inpexp[i][1] , energieslist[i], "kx")
            
     plt.title('Potential, Eigenstates, <x>')
     plt.ylabel('Energy [Hartree]')
     plt.xlabel('x [Bohr]')
+
+
 
     plt.subplot(1, 2, 2)
     plt.title('\u03C3')
