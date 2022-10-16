@@ -2,9 +2,9 @@
 main-script to open functions and create the wanted output
 """
 import os.path
-import plotter as pt
-import interinterpolator as pol
+import interpolator as pol
 import solver as sol
+import plotter as pt
 
 print(os.getcwd())
 
@@ -31,6 +31,6 @@ elif answer =='n':
 else:
     print('You have to enter y or n')
 
-pt.interpol()
-sol.schroedinger_solver()
-pol.visualizer()
+#pol.interpol()
+#sol.schroedinger_solver()
+#pt.visualizer()
