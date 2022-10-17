@@ -10,14 +10,10 @@ def visualizer(arg=None):
     #open all necessary files an save them in lists
     
     inppot = np.loadtxt("potential.dat")
-    
     inpwav = np.loadtxt("wavefuncs.dat")
-        
     inpexp = np.loadtxt("expvalues.dat")
-
     inpeng = np.loadtxt("energies.dat")
-    
-    
+
     #convert items into floats    
 
     energieslist = []

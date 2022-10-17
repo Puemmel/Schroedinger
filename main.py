@@ -31,6 +31,6 @@ elif answer =='n':
 else:
     print('You have to enter y or n')
 
-#pol.interpol()
-#sol.schroedinger_solver()
-#pt.visualizer()
+pol.interpol()
+sol.schroedinger_solver()
+pt.visualizer()

@@ -19,10 +19,7 @@ def interpol(arg=None):
     for i in range(int(pot[4][0])):
         xpot.append(float(pot[i+5][0]))
         ypot.append(float(pot[i+5][1]))
-
-
     #interpolation
-    
 
     if str(pot[3][0]) == 'linear':
         z = interpolate.interp1d(xpot, ypot, kind = "linear")
@@ -35,15 +32,12 @@ def interpol(arg=None):
         
     else:
         print("Error with interpolation")
-        pass
-        
+        pass     
     
-    #Create file potential.dat    
-    
+    #Create file potential.dat
     x = np.linspace(float(pot[1][0]), float(pot[1][1]), int(pot[1][2]))
     potpoints = []
     potxpoints = []
- 
 
     f2 = open("potential.dat", "w")
     for i in x:
@@ -51,7 +45,6 @@ def interpol(arg=None):
     
     for i in x:
         potxpoints.append(i)
-    
     
     for i in range(len(potpoints)):
         f2.write(str(potxpoints[i]))
