@@ -4,4 +4,9 @@ expvalues.dat
 potential.dat
 schroedinger.inp
 wavefuncs.dat
-
+All.inp
+__pycache__/interpolator.cpython-37.pyc
+__pycache__/plotter.cpython-37.pyc
+__pycache__/solver.cpython-37.pyc
+__pycache__/plotter.cpython-39.pyc
+__pycache__/interpolator.cpython-310.pyc
