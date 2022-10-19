@@ -1,4 +1,4 @@
-__pychache__
+/__pychache__
 .pytest_cache
 .spyproject
 energies.dat
@@ -12,5 +12,6 @@ RefPot3.dat
 RefPot4.dat
 RefPot5.dat
 RefPot6.dat
+.venv/
 
 
