@@ -6,13 +6,18 @@ def visualizer(arg=None):
     plots the potential, wavefunctions, energies, expected x value and sigma
     
     """
+    
     #open all necessary files an save them in lists
     
     inppot = np.loadtxt("potential.dat")
+    
     inpwav = np.loadtxt("wavefuncs.dat")
+        
     inpexp = np.loadtxt("expvalues.dat")
-    inpeng = np.loadtxt("energies.dat")
 
+    inpeng = np.loadtxt("energies.dat")
+    
+    
     #convert items into floats    
 
     energieslist = []
@@ -29,7 +34,8 @@ def visualizer(arg=None):
     
     inpwav = np.array(inpwav)
     inpexp = np.array(inpexp)
-      
+    
+    
     #ask user if he wants to manipulate the plot
     t = 0
     while t == 0:
@@ -67,7 +73,8 @@ def visualizer(arg=None):
     #plot energie grid
     for i in range(len(energieslist)):
         plt.axhline(y=energieslist[i], color='gray', linestyle='-',alpha=0.5)
-          
+         
+    
     plt.plot(inpwav[:,0], potlist)
     for i in range(len(inpwav[0]) - 1):
         plt.plot(inpwav[:,0], ampl*inpwav[:,i+1] + energieslist[i])
@@ -79,6 +86,8 @@ def visualizer(arg=None):
     plt.ylabel('Energy [Hartree]')
     plt.xlabel('x [Bohr]')
 
+
+
     plt.subplot(1, 2, 2)
     plt.title('\u03C3')
     if value:
@@ -88,10 +97,16 @@ def visualizer(arg=None):
     #plot energie grid
     for i in range(len(energieslist)):
         plt.axhline(y=energieslist[i], color='gray', linestyle='-',alpha=0.5)
-          
+         
+    
     for i in range(len(inpexp)):
         plt.plot(inpexp[i][0], energieslist[i], 'm+')
     
     plt.xlabel('[Bohr]')
     
+   
+    
     plt.show()
+
+
+

@@ -1,3 +1,4 @@
+Asymmetrischer Potentialtopf
 1.0 # mass
 0.0 20.0 1999 # xMin xMax nPoint
 1 7 # first and last eigenvalue to include in the output
