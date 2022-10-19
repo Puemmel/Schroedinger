@@ -36,39 +36,39 @@ def test_answer1():
     if TestVariable == "Unendlich tiefer Potentialkopf":
         for i in range(len(PotCalc)): 
             for j in range(len(PotCalc)):
-                assert rpot("RefPot1.dat")[i][j] == PotCalc[i][j]
+                assert rpot("RefPot.dat")[i][j] == PotCalc[i][j]
 
 def test_answer2():
     pol.interpol("schroedinger.inp")
     if TestVariable == "Endlich tiefer Potentialkopf":
         for i in range(len(PotCalc)): 
             for j in range(len(PotCalc)):
-                assert rpot("RefPot2.dat")[i][j] == PotCalc[i][j]
+                assert rpot("RefPot.dat")[i][j] == PotCalc[i][j]
 
 def test_answer3():
     pol.interpol("schroedinger.inp")
     if TestVariable == "Harmonischer Oszillator":
         for i in range(len(PotCalc)): 
             for j in range(len(PotCalc)):
-                assert rpot("RefPot2.dat")[i][j] == PotCalc[i][j]
+                assert rpot("RefPot.dat")[i][j] == PotCalc[i][j]
 
 def test_answer4():
     pol.interpol("schroedinger.inp")
     if TestVariable == "Doppelter Potentialtopf (linear)":
         for i in range(len(PotCalc)): 
             for j in range(len(PotCalc)):
-                assert rpot("RefPot2.dat")[i][j] == PotCalc[i][j]
+                assert rpot("RefPot.dat")[i][j] == PotCalc[i][j]
 
 def test_answer5():
     pol.interpol("schroedinger.inp")
     if TestVariable == "Doppelter Potentialkopf (natÃ¼rlicher kubischer Spline)":
         for i in range(len(PotCalc)): 
             for j in range(len(PotCalc)):
-                assert rpot("RefPot2.dat")[i][j] == PotCalc[i][j]
+                assert rpot("RefPot.dat")[i][j] == PotCalc[i][j]
 
 def test_answer5():
     pol.interpol("schroedinger.inp")
     if TestVariable == "Asymmetrischer Potentialtopf":
         for i in range(len(PotCalc)): 
             for j in range(len(PotCalc)):
-                assert rpot("RefPot2.dat")[i][j] == PotCalc[i][j]
+                assert rpot("RefPot.dat")[i][j] == PotCalc[i][j]

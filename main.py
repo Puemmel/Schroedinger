@@ -1,7 +1,8 @@
-y"""
+"""
 main-script to open functions and create the wanted output
 """
 import os.path
+from tkinter import Y
 import interpolator as pol
 import solver as sol
 import plotter as pt
@@ -33,8 +34,4 @@ else:
 
 pol.interpol()
 sol.schroedinger_solver()
-<<<<<<< HEAD
 pt.visualizer()
-=======
-pt.visualizer()
->>>>>>> master

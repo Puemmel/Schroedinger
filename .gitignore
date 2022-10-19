@@ -1,4 +1,3 @@
-/__pychache__
 __pychache__
 .pytest_cache
 .spyproject
@@ -7,7 +6,6 @@ expvalues.dat
 potential.dat
 schroedinger.inp
 wavefuncs.dat
-<<<<<<< HEAD
 RefPot1.dat
 RefPot2.dat
 RefPot3.dat
@@ -15,13 +13,16 @@ RefPot4.dat
 RefPot5.dat
 RefPot6.dat
 .venv/
-
-
-=======
 All.inp
 __pycache__/interpolator.cpython-37.pyc
 __pycache__/plotter.cpython-37.pyc
 __pycache__/solver.cpython-37.pyc
 __pycache__/plotter.cpython-39.pyc
 __pycache__/interpolator.cpython-310.pyc
->>>>>>> master
+RefExp1.dat
+RefExp2.dat
+RefExp3.dat
+RefExp4.dat
+RefExp5.dat
+RefExp6.dat
+
