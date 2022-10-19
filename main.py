@@ -1,4 +1,4 @@
-"""
+y"""
 main-script to open functions and create the wanted output
 """
 import os.path
@@ -33,4 +33,8 @@ else:
 
 pol.interpol()
 sol.schroedinger_solver()
+<<<<<<< HEAD
 pt.visualizer()
+=======
+pt.visualizer()
+>>>>>>> master
