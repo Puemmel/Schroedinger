@@ -1,3 +1,6 @@
+"""
+Using input-file and potential.dat to create the wavefunctions, energies and expected values
+"""
 import math
 import numpy as np
 from scipy import linalg
@@ -10,93 +13,93 @@ def schroedinger_solver(arg=None):
             energies.dat
             expvalues.dat
     """
-    f = open("schroedinger.inp", "r")
-    inp = []
-    for x in f:
-        inp.append(x.split())
-    f.close()
+    with open("schroedinger.inp", "r", encoding="utf-8") as file1:
+        inp = []
+        for i in file1:
+            inp.append(i.split())
+        file1.close()
 
     #def some constants and trimatrix diagonals
 
-    m = float(inp[1][0])
-    delta = (float(inp[2][1]) - float(inp[2][0]))/int(inp[2][2])
-    n = int(inp[2][2])
-    a = 1/(m*delta**2)
-        
-    diag = np.empty(n, dtype = float)
-    offdiag = np.full(n-1, -0.5*a)
-    
-    f1 = open("potential.dat", "r")
+    mass1 = float(inp[1][0])
+    delta1 = (float(inp[2][1]) - float(inp[2][0]))/int(inp[2][2])
+    npoints = int(inp[2][2])
+    Res = 1/(mass1*delta1**2)
+
+    diag = np.empty(npoints, dtype = float)
+    offdiag = np.full(npoints-1, -0.5*Res)
+
     inppot = []
-    for y in f1:
-        inppot.append(y.split())
-    f1.close()
-    
-    for i in range(n):
+    with open("potential.dat", "r", encoding="utf-8") as file2:
+        for i in file2:
+            inppot.append(i.split())
+        file2.close()
+
+    for i in range(npoints):
         inppot[i][0] = float(inppot[i][0])
         inppot[i][1] = float(inppot[i][1])
-    for i in range(n):
-        diag[i] = inppot[i][1] + a
-    
+    for i in range(npoints):
+        diag[i] = inppot[i][1] + Res
+
     #Calculate eigenvalues and normed eigenvectormatrix in an array
     eigenvalues,eigenvectormatrix = linalg.eigh_tridiagonal(diag, offdiag)
 
-    x = np.linspace(float(inp[2][0]), float(inp[2][1]), int(inp[2][2]))
-    d = [[] for x in range(int(inp[3][0]),int(inp[3][1]) + 1)]
+    xval1 = np.linspace(float(inp[2][0]), float(inp[2][1]), int(inp[2][2]))
+    list1 = [[] for xval1 in range(int(inp[3][0]),int(inp[3][1]) + 1)]
 
     abssquaremat = abs(eigenvectormatrix)**2
-    redsquamat = np.empty((n,len(d)), dtype=(float))
-    
-    for j in range(len(d)):
-        for i in range(n):
+    redsquamat = np.empty((npoints,len(list1)), dtype=(float))
+
+    for j in range(len(list1)):
+        for i in range(npoints):
             redsquamat[i][j] = abssquaremat[i][j]
 
-    normat = np.sum(redsquamat, axis=0) * delta
-  
-    for j in range(len(d)):
-        for i in range(n):
-            d[j].append(eigenvectormatrix[i][j]/math.sqrt(normat[j]))
+    normat = np.sum(redsquamat, axis=0) * delta1
 
-    f2 = open("wavefuncs.dat", "w")
-    for i in range(len(x)):
-        f2.write(str(x[i]))
-        for j in range(len(d)):
-            f2.write(" ")
-            f2.write(str(d[j][i]))
-        f2.write("\n")
-    f2.close()
-             
-    f3 = open("energies.dat", "w")
-    for i in range(int(inp[3][0]) - 1,int(inp[3][1])):
-        f3.write(str(eigenvalues[i]))
-        f3.write("\n")
-    f3.close()
-        
+    for j in range(len(list1)):
+        for i in range(npoints):
+            list1[j].append(eigenvectormatrix[i][j]/math.sqrt(normat[j]))
+
+    with open("wavefuncs.dat", "w", encoding="utf-8") as file3:
+        for i in range(len(xval1)):
+            file3.write(str(xval1[i]))
+            for j in range(len(list1)):
+                file3.write(" ")
+                file3.write(str(list1[j][i]))
+            file3.write("\n")
+        file3.close()
+
+    with open("energies.dat", "w", encoding="utf-8") as file4:
+        for i in range(int(inp[3][0]) - 1,int(inp[3][1])):
+            file4.write(str(eigenvalues[i]))
+            file4.write("\n")
+        file4.close()
+
     # calculate ortsop and sigma
-    expx = [[] for i in range(len(d))]
-    expxx = [[] for i in range(len(d))]
-    
-    for j in range(len(d)):
-        for i in range(n):
-            k = d[j][i] * x[i] * d[j][i]
-            l = d[j][i] * (x[i])**2 * d[j][i]
+    expx = [[] for i in range(len(list1))]
+    expxx = [[] for i in range(len(list1))]
+
+    for j in range(len(list1)):
+        for i in range(npoints):
+            k = list1[j][i] * xval1[i] * list1[j][i]
+            l = list1[j][i] * (xval1[i])**2 * list1[j][i]
             expxx[j].append(l)
             expx[j].append(k)
 
-    for j in range(len(d)):
-        expx[j] = delta * sum(expx[j])
-        expxx[j] = delta * sum(expxx[j])
-   
+    for j in range(len(list1)):
+        expx[j] = delta1 * sum(expx[j])
+        expxx[j] = delta1 * sum(expxx[j])
+
     sigma = []
     for i in range(len(expx)):
         sigma.append(math.sqrt(expxx[i] - (expx[i])**2))
-    
+
     #first sigma then x op. value
-    f4 = open("expvalues.dat", "w")
-    for i in range(len(sigma)):
-        f4.write(str(sigma[i]))
-        f4.write(" ")
-        f4.write(str(expx[i]))
-        f4.write("\n")
-    f4.close()
+    with open("expvalues.dat", "w", encoding="utf-8") as file5:
+        for i in range(len(sigma)):
+            file5.write(str(sigma[i]))
+            file5.write(" ")
+            file5.write(str(expx[i]))
+            file5.write("\n")
+        file5.close()
     

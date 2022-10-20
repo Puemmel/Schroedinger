@@ -2,7 +2,6 @@
 main-script to open functions and create the wanted output
 """
 import os.path
-from tkinter import Y
 import interpolator as pol
 import solver as sol
 import plotter as pt
@@ -30,7 +29,7 @@ elif answer =='n':
     # e.g. C:\Users\Bob\Desktop
     # or /home/Bob/Desktop
 else:
-    print('You have to enter y or n')
+    print('You haven not enter y or n, we stay in current directory')
 
 pol.interpol()
 sol.schroedinger_solver()
