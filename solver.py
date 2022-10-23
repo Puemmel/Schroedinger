@@ -55,16 +55,16 @@ def schroedinger_solver():
 
     normat = np.sum(redsquamat, axis=0) * delta1
 
-    for j, elem in enumerate(list1):
+    for j, item in enumerate(list1):
         for i in range(npoints):
-            elem.append(eigenvectormatrix[i][j]/math.sqrt(normat[j]))
+            item.append(eigenvectormatrix[i][j]/math.sqrt(normat[j]))
 
     with open("wavefuncs.dat", "w", encoding="utf-8") as file3:
         for i, elem in enumerate(xval1):
             file3.write(str(elem))
             for j, k in enumerate(list1):
                 file3.write(" ")
-                file3.write(str(k))
+                file3.write(str(k[i]))
             file3.write("\n")
         file3.close()
 
@@ -78,25 +78,25 @@ def schroedinger_solver():
     expx = [[] for i in range(len(list1))]
     expxx = [[] for i in range(len(list1))]
 
-    for j, k in enumerate(list1):
+    for j, _ in enumerate(list1):
         for i in range(npoints):
-            k = k * xval1[i] * k[j][i]
-            sig = k[j][i] * (xval1[i])**2 * k[j][i]
+            k = _[i] * xval1[i] * _[i]
+            sig = _[i] * (xval1[i])**2 * _[i]
             expxx[j].append(sig)
             expx[j].append(k)
 
-    for j in range(len(list1)):
+    for j, _ in enumerate(list1):
         expx[j] = delta1 * sum(expx[j])
         expxx[j] = delta1 * sum(expxx[j])
 
     sigma = []
-    for i, k in enumerate(expx):
-        sigma.append(math.sqrt(expxx[i] - (k)**2))
+    for i, _ in enumerate(expx):
+        sigma.append(math.sqrt(expxx[i] - (_)**2))
 
     #first sigma then x op. value
     with open("expvalues.dat", "w", encoding="utf-8") as file5:
-        for i, k in enumerate(sigma):
-            file5.write(str(k))
+        for i, _ in enumerate(sigma):
+            file5.write(str(_))
             file5.write(" ")
             file5.write(str(expx[i]))
             file5.write("\n")
