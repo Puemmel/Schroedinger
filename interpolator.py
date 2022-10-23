@@ -5,7 +5,7 @@ Script so create the potential.dat based on schroedinger.inp
 import numpy as np
 from scipy import interpolate
 
-def interpol(arg=None):
+def interpol():
     """
     opens schroedinger.inp and interpolates the given Potential
     saves the calculated xy points in potential.dat
@@ -46,9 +46,9 @@ def interpol(arg=None):
             potpoints.append(pol1(i))
         for i in xval1:
             potxpoints.append(i)
-        for i in range(len(potpoints)):
+        for i, potpoint in enumerate(potpoints):
             file2.write(str(potxpoints[i]))
             file2.write(" ")
-            file2.write(str(potpoints[i]))
+            file2.write(str(potpoint))
             file2.write('\n')
     file2.close()

@@ -44,35 +44,35 @@ def rpot_flatlist(arg) -> list:
 def test_answer1() -> None:
     """checking the first example potential with reference file"""
     if TEST_VARIABLE == "Unendlich tiefer Potentialkopf":
-        for j in range(len(flat_list_pot)):
-            assert flat_list_pot[j] == rpot_flatlist("RefPot1.dat")[j]
+        for j, k in enumerate(flat_list_pot):
+            assert k == rpot_flatlist("RefPot1.dat")[j]
 
 def test_answer2() -> None:
     """checking the second example potential with reference file"""
     if TEST_VARIABLE == "Endlich tiefer Potentialkopf":
-        for j in range(len(flat_list_pot)):
-            assert flat_list_pot[j] == rpot_flatlist("RefPot2.dat")[j]
+        for j, k in enumerate(flat_list_pot):
+            assert k == rpot_flatlist("RefPot2.dat")[j]
 
 def test_answer3() -> None:
     """checking the third example potential with reference file"""
     if TEST_VARIABLE == "Harmonischer Oszillator":
-        for j in range(len(flat_list_pot)):
-            assert flat_list_pot[j] == rpot_flatlist("RefPot3.dat")[j]
+        for j, k in enumerate(flat_list_pot):
+            assert k == rpot_flatlist("RefPot3.dat")[j]
 
 def test_answer4() -> None:
     """checking the fourth example potential with reference file"""
     if TEST_VARIABLE == "Doppelter Potentialtopf (linear)":
-        for j in range(len(flat_list_pot)):
-            assert flat_list_pot[j] == rpot_flatlist("RefPot4.dat")[j]
+        for j, k in enumerate(flat_list_pot):
+            assert k == rpot_flatlist("RefPot4.dat")[j]
 
 def test_answer5() -> None:
     """checking the fifth example potential with reference file"""
     if TEST_VARIABLE == "Doppelter Potentialkopf (natürlicher kubischer Spline)":
-        for j in range(len(flat_list_pot)):
-            assert flat_list_pot[j] == rpot_flatlist("RefPot5.dat")[j]
+        for j, k in enumerate(flat_list_pot):
+            assert k  == rpot_flatlist("RefPot5.dat")[j]
 
 def test_answer6() -> None:
     """checking the sixth example potential with reference file"""
     if TEST_VARIABLE == "Asymmetrischer Potentialtopf":
-        for j in range(len(flat_list_pot)):
-            assert flat_list_pot[j] == rpot_flatlist("RefPot6.dat")[j]
+        for j, k in enumerate(flat_list_pot):
+            assert k == rpot_flatlist("RefPot6.dat")[j]

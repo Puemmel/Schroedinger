@@ -4,7 +4,7 @@ Uses the files created beforehand to plot the values
 import numpy as np
 import matplotlib.pyplot as plt
 
-def visualizer(arg=None):
+def visualizer():
     """
     plots the potential, wavefunctions, energies, expected x value and sigma
 
@@ -19,13 +19,13 @@ def visualizer(arg=None):
     #convert items into floats
 
     energieslist = []
-    for i in range(len(inpeng)):
+    for i, _ in enumerate(inpeng):
         energieslist.append(float(inpeng[i]))
         for j in range(2):
             inpexp[i][j] = float(inpexp[i][j])
 
     potlist = []
-    for i in range(len(inpwav)):
+    for i, _ in enumerate(inpwav):
         potlist.append(float(inppot[i][1]))
         for j in range(len(inpwav[0])):
             inpwav[i][j] = float(inpwav[i][j])
@@ -73,14 +73,14 @@ def visualizer(arg=None):
         plt.ylim(ymin,ymax)
 
     #plot energie grid
-    for i in range(len(energieslist)):
-        plt.axhline(y=energieslist[i], color='gray', linestyle='-',alpha=0.5)
+    for i, _ in enumerate(energieslist):
+        plt.axhline(y=_, color='gray', linestyle='-',alpha=0.5)
 
     plt.plot(inpwav[:,0], potlist)
     for i in range(len(inpwav[0]) - 1):
         plt.plot(inpwav[:,0], ampl*inpwav[:,i+1] + energieslist[i])
 
-    for i in range(len(inpexp)):
+    for i, _ in enumerate(inpexp):
         plt.plot(inpexp[i][1] , energieslist[i], "kx")
 
     plt.title('Potential, Eigenstates, <x>')
@@ -94,10 +94,10 @@ def visualizer(arg=None):
         plt.ylim(sigmaymin,sigmaymax)
 
     #plot energie grid
-    for i in range(len(energieslist)):
-        plt.axhline(y=energieslist[i], color='gray', linestyle='-',alpha=0.5)
+    for i, _ in enumerate(energieslist):
+        plt.axhline(y=_, color='gray', linestyle='-',alpha=0.5)
 
-    for i in range(len(inpexp)):
+    for i, _ in enumerate(inpexp):
         plt.plot(inpexp[i][0], energieslist[i], 'm+')
 
     plt.xlabel('[Bohr]')

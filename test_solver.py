@@ -45,35 +45,35 @@ def rexp_flatlist(arg) -> list:
 def test_expvaluesanswer1() -> None:
     """checking the first example of expacted values with reference file"""
     if TEST_VARIABLEZWEI == "Unendlich tiefer Potentialkopf":
-        for j in range(len(flat_list_exp)):
-            assert flat_list_exp[j] == rexp_flatlist("RefExp1.dat")[j]
+        for j, k in enumerate(flat_list_exp):
+            assert k == rexp_flatlist("RefExp1.dat")[j]
 
 def test_expvaluesanswer2() -> None:
     """checking the second example of expacted values with reference file"""
     if TEST_VARIABLEZWEI == "Endlich tiefer Potentialkopf":
-        for j in range(len(flat_list_exp)):
-            assert flat_list_exp[j] == rexp_flatlist("RefExp2.dat")[j]
+        for j, k in enumerate(flat_list_exp):
+            assert k == rexp_flatlist("RefExp2.dat")[j]
 
 def test_expvaluesanswer3() -> None:
     """checking the third example of expacted values with reference file"""
     if TEST_VARIABLEZWEI == "Harmonischer Oszillator":
-        for j in range(len(flat_list_exp)):
-            assert flat_list_exp[j] == rexp_flatlist("RefExp3.dat")[j]
+        for j, k in enumerate(flat_list_exp):
+            assert k == rexp_flatlist("RefExp3.dat")[j]
 
 def test_expvaluesanswer4() -> None:
     """checking the fourth example of expacted values with reference file"""
     if TEST_VARIABLEZWEI == "Doppelter Potentialtopf (linear)":
-        for j in range(len(flat_list_exp)):
-            assert flat_list_exp[j] == rexp_flatlist("RefExp4.dat")[j]
+        for j, k in enumerate(flat_list_exp):
+            assert k == rexp_flatlist("RefExp4.dat")[j]
 
 def test_expvaluesanswer5() -> None:
     """checking the fifth example of expacted values with reference file"""
     if TEST_VARIABLEZWEI == "Doppelter Potentialkopf (natÃ¼rlicher kubischer Spline)":
-        for j in range(len(flat_list_exp)):
-            assert flat_list_exp[j] == rexp_flatlist("RefExp5.dat")[j]
+        for j, k in enumerate(flat_list_exp):
+            assert k == rexp_flatlist("RefExp5.dat")[j]
 
 def test_expvaluesanswer6() -> None:
     """checking the sixth example of expacted values with reference file"""
     if TEST_VARIABLEZWEI == "Asymmetrischer Potentialtopf":
-        for j in range(len(flat_list_exp)):
-            assert flat_list_exp[j] == rexp_flatlist("RefExp6.dat")[j]
+        for j, k in enumerate(flat_list_exp):
+            assert k == rexp_flatlist("RefExp6.dat")[j]
