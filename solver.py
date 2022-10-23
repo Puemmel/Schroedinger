@@ -20,14 +20,13 @@ def schroedinger_solver(arg=None):
         file1.close()
 
     #def some constants and trimatrix diagonals
-
     mass1 = float(inp[1][0])
     delta1 = (float(inp[2][1]) - float(inp[2][0]))/int(inp[2][2])
     npoints = int(inp[2][2])
-    Res = 1/(mass1*delta1**2)
+    res1 = 1/(mass1*delta1**2)
 
     diag = np.empty(npoints, dtype = float)
-    offdiag = np.full(npoints-1, -0.5*Res)
+    offdiag = np.full(npoints-1, -0.5*res1)
 
     inppot = []
     with open("potential.dat", "r", encoding="utf-8") as file2:
@@ -39,7 +38,7 @@ def schroedinger_solver(arg=None):
         inppot[i][0] = float(inppot[i][0])
         inppot[i][1] = float(inppot[i][1])
     for i in range(npoints):
-        diag[i] = inppot[i][1] + Res
+        diag[i] = inppot[i][1] + res1
 
     #Calculate eigenvalues and normed eigenvectormatrix in an array
     eigenvalues,eigenvectormatrix = linalg.eigh_tridiagonal(diag, offdiag)
@@ -82,8 +81,8 @@ def schroedinger_solver(arg=None):
     for j in range(len(list1)):
         for i in range(npoints):
             k = list1[j][i] * xval1[i] * list1[j][i]
-            l = list1[j][i] * (xval1[i])**2 * list1[j][i]
-            expxx[j].append(l)
+            sig = list1[j][i] * (xval1[i])**2 * list1[j][i]
+            expxx[j].append(sig)
             expx[j].append(k)
 
     for j in range(len(list1)):

@@ -19,11 +19,14 @@ elif answer =='n':
         os.chdir(path)
         print(path)
     except FileNotFoundError:
-        print("Directory: {0} does not exist".format(path))
+        print(f"Directory: {path} does not exist".format(path))
+        print("The programm will be run in the current directory")
     except NotADirectoryError:
-        print("{0} is not a directory".format(path))
+        print(f"{path} is not a directory".format(path))
+        print("The programm will be run in the current directory")
     except PermissionError:
-        print("You do not have permissions to change to {0}".format(path))
+        print(f"You do not have permissions to change to {path}".format(path))
+        print("The programm will be run in the current directory")
     else:
         print('Seomething didnt work out')
     # e.g. C:\Users\Bob\Desktop

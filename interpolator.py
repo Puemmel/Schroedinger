@@ -41,17 +41,14 @@ def interpol(arg=None):
     potpoints = []
     potxpoints = []
 
-    file2 = open("potential.dat", "w", encoding="utf-8")
-    for i in xval1:
-        potpoints.append(pol1(i))
-
-    for i in xval1:
-        potxpoints.append(i)
-
-    for i in range(len(potpoints)):
-        file2.write(str(potxpoints[i]))
-        file2.write(" ")
-        file2.write(str(potpoints[i]))
-        file2.write('\n')
-
+    with open("potential.dat", "w", encoding="utf-8") as file2:
+        for i in xval1:
+            potpoints.append(pol1(i))
+        for i in xval1:
+            potxpoints.append(i)
+        for i in range(len(potpoints)):
+            file2.write(str(potxpoints[i]))
+            file2.write(" ")
+            file2.write(str(potpoints[i]))
+            file2.write('\n')
     file2.close()
