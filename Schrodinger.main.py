@@ -1,9 +1,19 @@
 """
 main-script to open functions and create the wanted output
 """
+import argparse
 import os.path
 import schrodinger_interpolator as pol
 import schrodinger_solver as sol
+
+
+_DESCRIPTION = """
+Script to solve the 1D Schrodinger Equation
+"""
+parser = argparse.ArgumentParser(description=_DESCRIPTION)
+msg = "Directory (default: .)"
+parser.add_argument('-d', '--directory', default='.', 
+                    help=msg)
 
 print(os.getcwd())
 
