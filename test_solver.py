@@ -21,7 +21,7 @@ with open("schroedinger.inp", "r", encoding="utf-8") as file1:
 TEST_VARIABLEZWEI = " ".join(InpTestZwei[0])
 
 def rexp(arg) -> list:
-    """definig reference expected values list depending on name of calculation"""
+    """defining reference expected values list depending on name of calculation"""
     result = []
     with open(arg, "r", encoding="utf-8") as r_t:
         for i_x in r_t:
@@ -42,7 +42,7 @@ def rexp_flatlist(arg) -> list:
             flat_list_rexp.append(ritem)
     return flat_list_rexp
 
-def test_expvaluesanswer1() -> None:
+def test_expvaluesanswer1() -> None: #Gibt keinen Datentyp zurück
     """checking the first example of expacted values with reference file"""
     if TEST_VARIABLEZWEI == "Unendlich tiefer Potentialkopf":
         for j, k in enumerate(flat_list_exp):
