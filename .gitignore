@@ -7,6 +7,8 @@ __pycache__/plotter.cpython-37.pyc
 __pycache__/solver.cpython-37.pyc
 __pycache__/plotter.cpython-39.pyc
 __pycache__/interpolator.cpython-310.pyc
+__pycache__/schrodinger_interpolator.cpython-310.pyc
+__pycache__/schrodinger_solver.cpython-310.pyc
 docs
 
 

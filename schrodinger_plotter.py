@@ -24,7 +24,7 @@ for i, _ in enumerate(inpwav):
     inpwav = np.array(inpwav)
     inpexp = np.array(inpexp)
 
-def visualizer():
+def schrodinger_plotter():
     """
     plots the potential, wavefunctions, energies, expected x value and sigma
 

@@ -10,9 +10,10 @@ Welcome to Schroedinger_solver documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   main.rst
-   interpolator.rst
-   solver.rst
+   Schrodinger.main.rst
+   Visualizer.main.rst
+   Schrodinger_interpolator.rst
+   Schrodinger_solver.rst
    plotter.rst
 
 Indices and tables
