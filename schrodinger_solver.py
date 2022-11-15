@@ -5,7 +5,7 @@ import math
 import numpy as np
 from scipy import linalg
 
-def schroedinger_solver():
+def schrodinger_solver():
     """
     solves the schroedinger equation with the interpolated potential via eigenvalue problem.
     -------
@@ -20,9 +20,9 @@ def schroedinger_solver():
         file1.close()
 
     #def some constants and trimatrix diagonals
-    mass1 = float(inp[1][0])
-    delta1 = (float(inp[2][1]) - float(inp[2][0]))/int(inp[2][2]) 
-    npoints = int(inp[2][2]) 
+    mass1 = float(inp[0][0])
+    delta1 = (float(inp[1][1]) - float(inp[1][0]))/int(inp[1][2]) 
+    npoints = int(inp[1][2]) 
     res1 = 1/(mass1*delta1**2)
 
     diag = np.empty(npoints, dtype = float)
@@ -42,8 +42,8 @@ def schroedinger_solver():
 
     eigenvalues,eigenvectormatrix = linalg.eigh_tridiagonal(diag, offdiag)
 
-    xval1 = np.linspace(float(inp[2][0]), float(inp[2][1]), int(inp[2][2]))
-    list1 = [[] for xval1 in range(int(inp[3][0]),int(inp[3][1]) + 1)]
+    xval1 = np.linspace(float(inp[1][0]), float(inp[1][1]), int(inp[1][2]))
+    list1 = [[] for xval1 in range(int(inp[2][0]),int(inp[2][1]) + 1)]
 
     abssquaremat = abs(eigenvectormatrix)**2 
     redsquamat = np.empty((npoints,len(list1)), dtype=(float)) 
@@ -66,7 +66,7 @@ def schroedinger_solver():
         file3.close()
 
     with open("energies.dat", "w", encoding="utf-8") as file4:
-        for i in range(int(inp[3][0]) - 1,int(inp[3][1])):
+        for i in range(int(inp[2][0]) - 1,int(inp[2][1])):
             file4.write(str(eigenvalues[i]))
             file4.write("\n")
         file4.close()

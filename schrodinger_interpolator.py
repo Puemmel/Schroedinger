@@ -19,24 +19,24 @@ def schrodinger_interpol():
 
     xpot = []
     ypot = []
-    for i in range(int(pot[5][0])):
-        xpot.append(float(pot[i+6][0])) 
-        ypot.append(float(pot[i+6][1])) 
+    for i in range(int(pot[4][0])):
+        xpot.append(float(pot[i+5][0])) 
+        ypot.append(float(pot[i+5][1])) 
 
-    if str(pot[4][0]) == 'linear': 
+    if str(pot[3][0]) == 'linear': 
         pol1 = interpolate.interp1d(xpot, ypot, kind = "linear")
 
-    elif pot[4][0] == "polynomial":
+    elif pot[3][0] == "polynomial":
         pol1 = interpolate.lagrange(xpot, ypot)
 
-    elif pot[4][0] == "cspline":
+    elif pot[3][0] == "cspline":
         pol1 = interpolate.interp1d(xpot, ypot, kind = "cubic")
 
     else:
         print("Error with interpolation")
 
     #Create file potential.dat
-    xval1 = np.linspace(float(pot[2][0]), float(pot[2][1]), int(pot[2][2]))
+    xval1 = np.linspace(float(pot[1][0]), float(pot[1][1]), int(pot[1][2]))
     potpoints = []
     potxpoints = []
 

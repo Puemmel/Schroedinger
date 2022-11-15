@@ -10,10 +10,13 @@ import schrodinger_solver as sol
 _DESCRIPTION = """
 Script to solve the 1D Schrodinger Equation
 """
-parser = argparse.ArgumentParser(description=_DESCRIPTION)
-msg = "Directory (default: .)"
-parser.add_argument('-d', '--directory', default='.', 
+def Command():
+    parser = argparse.ArgumentParser(description=_DESCRIPTION)
+    msg = "Directory (default: .)"
+    parser.add_argument('-d', '--directory', default='.',metavar='DIR', 
                     help=msg)
+    args=parser.parse_args()
+    print("Directory: '{}".format(args.directory))
 
 print(os.getcwd())
 
@@ -44,5 +47,5 @@ else:
     print('You haven not enter y or n, we stay in current directory')
 
 pol.schrodinger_interpol()
-sol.schroedinger_solver()
+sol.schrodinger_solver()
 
