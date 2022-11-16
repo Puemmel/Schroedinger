@@ -5,7 +5,7 @@ import math
 import numpy as np
 from scipy import linalg
 
-def schrodinger_solver():
+def schrodinger_solver(arg):
     """
     solves the schroedinger equation with the interpolated potential via eigenvalue problem.
     -------
@@ -13,7 +13,8 @@ def schrodinger_solver():
             energies.dat
             expvalues.dat
     """
-    with open("schrodinger.inp", "r", encoding="utf-8") as file1:
+    a = arg + "schrodinger.inp"
+    with open(a, "r", encoding="utf-8") as file1:
         inp = []
         for i in file1:
             inp.append(i.split())
@@ -29,6 +30,8 @@ def schrodinger_solver():
     offdiag = np.full(npoints-1, -0.5*res1)
 
     inppot = []
+
+    b = arg + "potential.dat"
     with open("potential.dat", "r", encoding="utf-8") as file2:
         for i in file2:
             inppot.append(i.split())
@@ -56,7 +59,8 @@ def schrodinger_solver():
         for i in range(npoints):
             item.append(eigenvectormatrix[i][j]/math.sqrt(normat[j]))
 
-    with open("wavefuncs.dat", "w", encoding="utf-8") as file3:
+    c = arg + "wavefuncs.dat"
+    with open(c, "w", encoding="utf-8") as file3:
         for i, elem in enumerate(xval1):
             file3.write(str(elem))
             for j, k in enumerate(list1):
@@ -65,7 +69,8 @@ def schrodinger_solver():
             file3.write("\n")
         file3.close()
 
-    with open("energies.dat", "w", encoding="utf-8") as file4:
+    d = arg + "energies.dat"
+    with open(d, "w", encoding="utf-8") as file4:
         for i in range(int(inp[2][0]) - 1,int(inp[2][1])):
             file4.write(str(eigenvalues[i]))
             file4.write("\n")
@@ -91,7 +96,8 @@ def schrodinger_solver():
         sigma.append(math.sqrt(expxx[i] - (_)**2))
 
     #first sigma then x op. value
-    with open("expvalues.dat", "w", encoding="utf-8") as file5:
+    e = arg + "expvalues.dat"
+    with open(e, "w", encoding="utf-8") as file5:
         for i, _ in enumerate(sigma):
             file5.write(str(_))
             file5.write(" ")

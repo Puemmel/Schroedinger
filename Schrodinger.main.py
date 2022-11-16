@@ -46,6 +46,6 @@ elif answer =='n':
 else:
     print('You haven not enter y or n, we stay in current directory')
 
-pol.schrodinger_interpol()
-sol.schrodinger_solver()
+pol.schrodinger_interpol("Case2/")
+sol.schrodinger_solver("Case2/")
 

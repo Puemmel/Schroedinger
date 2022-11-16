@@ -5,14 +5,15 @@ Script so create the potential.dat based on schroedinger.inp
 import numpy as np
 from scipy import interpolate
 
-def schrodinger_interpol():
+def schrodinger_interpol(arg=""):
     """
     opens schroedinger.inp and interpolates the given Potential
     saves the calculated xy points in potential.dat
     -------
     """
     pot = [] 
-    with open ("schrodinger.inp", "r", encoding="utf-8") as file1:
+    a = arg + "schrodinger.inp"
+    with open (a, "r", encoding="utf-8") as file1:
         for i in file1:
             pot.append(i.split())
         file1.close()
@@ -40,7 +41,8 @@ def schrodinger_interpol():
     potpoints = []
     potxpoints = []
 
-    with open("potential.dat", "w", encoding="utf-8") as file2: 
+    b = arg + "potential.dat"
+    with open(b , "w", encoding="utf-8") as file2: 
         for i in xval1: 
             potpoints.append(pol1(i))
         for i in xval1:
