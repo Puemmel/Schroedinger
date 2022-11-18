@@ -41,8 +41,8 @@ def read_potentialdat():
 def schrodinger_interpol():
     """
     interpolates the given Potential
-    saves the calculated xy points in potential.dat
     -------
+    Returns y values of the interpolated potential
     """
     pot, xpot, ypot = read_schrodingerinp()
 
@@ -59,15 +59,22 @@ def schrodinger_interpol():
         print("Error with interpolation")
         sys.exit('Aborting')
 
-    #Create file potential.dat
+    return pol1
+
+
+def writepotential():
+    """
+    saves the calculated xy points in potential.dat
+    """
+    pot, xpot, ypot = read_schrodingerinp()
+    pol1 = schrodinger_interpol()
     xval1 = np.linspace(float(pot[1][0]), float(pot[1][1]), int(pot[1][2]))
     potpoints = []
     potxpoints = []
-
+    
     with open("potential.dat", "w", encoding="utf-8") as file2: 
         for i in xval1: 
             potpoints.append(pol1(i))
-        for i in xval1:
             potxpoints.append(i)
         for i, potpoint in enumerate(potpoints): 
             file2.write(str(potxpoints[i]))
@@ -79,10 +86,8 @@ def schrodinger_interpol():
 def schrodinger_solver():
     """
     solves the schroedinger equation with the interpolated potential via eigenvalue problem.
-    -------
-    returns wavefuncs.dat
-            energies.dat
-            expvalues.dat
+    
+    and calculates wavefunctions, x-operator and sigma
     """
     inp, xpot, ypot = read_schrodingerinp()
 
@@ -115,21 +120,6 @@ def schrodinger_solver():
     for j in range(int(inp[2][1])):
         for i in range(int(inp[1][2])):
             solution[i][j] = eigenvectormatrix[i][j]/math.sqrt(solutionmat[j])
-    
-    with open("wavefuncs.dat", "w", encoding="utf-8") as file3:
-        for i in range(int(inp[1][2])):
-            file3.write(str(xval1[i]))
-            for j in range(int(inp[2][1])):
-                file3.write(" ")
-                file3.write(str(solution[i][j]))
-            file3.write("\n")
-        file3.close()
-
-    with open("energies.dat", "w", encoding="utf-8") as file4:
-        for i in range(int(inp[2][0]) - 1,int(inp[2][1])):
-            file4.write(str(eigenvalues[i]))
-            file4.write("\n")
-        file4.close()
 
     # calculate ortsop and sigma
     expx = np.empty((int(inp[1][2]),int(inp[2][1])))
@@ -147,7 +137,34 @@ def schrodinger_solver():
     for j in range(int(inp[2][1])):    
         sigma[0][j] = math.sqrt(sigma[0][j] - (expx[0][j])**2)
 
-    #first sigma then x op. value
+    return solution, eigenvalues, sigma, expx, xval1
+
+
+def writeplotdata():
+    """
+    returns wavefuncs.dat
+            energies.dat
+            expvalues.dat
+    """
+    inp, xpot, ypot = read_schrodingerinp()
+    solution, eigenvalues, sigma, expx, xval1 = schrodinger_solver()
+    with open("wavefuncs.dat", "w", encoding="utf-8") as file3:
+        for i in range(int(inp[1][2])):
+            file3.write(str(xval1[i]))
+            for j in range(int(inp[2][1])):
+                file3.write(" ")
+                file3.write(str(solution[i][j]))
+            file3.write("\n")
+        file3.close()
+
+    with open("energies.dat", "w", encoding="utf-8") as file4:
+        for i in range(int(inp[2][0]) - 1,int(inp[2][1])):
+            file4.write(str(eigenvalues[i]))
+            file4.write("\n")
+        file4.close()
+
+
+
     with open("expvalues.dat", "w", encoding="utf-8") as file5:
         for i in range(int(inp[2][1])):
             file5.write(str(sigma[0][i]))
@@ -156,6 +173,7 @@ def schrodinger_solver():
             file5.write("\n")
         file5.close()
 
-
 schrodinger_interpol()
+writepotential()
 schrodinger_solver()
+writeplotdata()
