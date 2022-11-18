@@ -1,35 +1,68 @@
-"""
-Uses the files created beforehand to plot the values
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 
-inppot = np.loadtxt("potential.dat")
-inpwav = np.loadtxt("wavefuncs.dat")
-inpexp = np.loadtxt("expvalues.dat")
-inpeng = np.loadtxt("energies.dat")
+def plotread():
+    inppot = np.loadtxt("potential.dat")
+    inpwav = np.loadtxt("wavefuncs.dat")
+    inpexp = np.loadtxt("expvalues.dat")
+    inpeng = np.loadtxt("energies.dat")
 
-energieslist = [] 
-for i, _ in enumerate(inpeng): 
-    energieslist.append(float(inpeng[i]))
-    for j in range(2):
-        inpexp[i][j] = float(inpexp[i][j])
+    energieslist = [] 
+    for i, _ in enumerate(inpeng): 
+        energieslist.append(float(inpeng[i]))
+        for j in range(2):
+            inpexp[i][j] = float(inpexp[i][j])
 
-potlist = [] 
-for i, _ in enumerate(inpwav):
-    potlist.append(float(inppot[i][1]))
-    for j in range(len(inpwav[0])):
-        inpwav[i][j] = float(inpwav[i][j])
+    potlist = [] 
+    for i, _ in enumerate(inpwav):
+        potlist.append(float(inppot[i][1]))
+        for j in range(len(inpwav[0])):
+            inpwav[i][j] = float(inpwav[i][j])
+        
+        inpwav = np.array(inpwav)
+        inpexp = np.array(inpexp)
+        
+    return energieslist, inpwav, inpexp, potlist
     
-    inpwav = np.array(inpwav)
-    inpexp = np.array(inpexp)
 
 def schrodinger_plotter():
     """
     plots the potential, wavefunctions, energies, expected x value and sigma
 
     """
-    #convert items into floats
+    energieslist, inpwav, inpexp, potlist = plotread()
+    counter = 0
+    while counter == 0:
+
+        ans = input("Do you want the plot as default or your own settings? [d/s]")
+        if ans == "d":
+            value = False
+            ampl = 1
+            counter = 1
+        elif ans == "s":
+            value = True
+            counter = 1
+
+            print("Please enter your values for the x and y axis for both plots as floats")
+            try:
+                xmin = float(input("xmin:"))
+                xmax = float(input("xmax:"))
+                ymin = float(input("ymin:"))
+                ymax = float(input("ymax:"))
+                sigmaxmin = float(input("sigmaxmin:"))
+                sigmaxmax = float(input("sigmaxmax:"))
+                sigmaymin = float(input("sigmaymin:"))
+                sigmaymax = float(input("sigmaymax:"))
+                ampl = float(input("amplitude of the wavefunc:"))
+            except ValueError:
+                print("It seems like you havent entered a float")
+                print("try again")
+                value = False
+                ampl = 1
+                counter = 0
+        else:
+            print("Youre input is not correct. Please repeat")
+            counter = 0
 
     plt.subplot(1, 2, 1)
     if value:
@@ -67,3 +100,5 @@ def schrodinger_plotter():
     plt.xlabel('[Bohr]')
 
     plt.show()
+    
+schrodinger_plotter()
