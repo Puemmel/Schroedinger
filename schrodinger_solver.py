@@ -1,11 +1,82 @@
-"""
-Using input-file and potential.dat to create the wavefunctions, energies and expected values
-"""
-import math
 import numpy as np
+from scipy import interpolate
+import sys
+import math
 from scipy import linalg
 
-def schrodinger_solver(arg):
+def read_schrodingerinp():
+    """
+    reads schroedinger.inp and puts the content into three seperate lists  
+    
+    Returns the content, x values, y values for the Interpolation 
+    """
+    pot = [] 
+    with open ("schrodinger.inp", "r", encoding="utf-8") as file1:
+        for i in file1:
+            pot.append(i.split())
+        file1.close()
+
+    xpot = []
+    ypot = []
+    for i in range(int(pot[4][0])):
+        xpot.append(float(pot[i+5][0])) 
+        ypot.append(float(pot[i+5][1])) 
+    
+    return pot, xpot, ypot
+
+def read_potentialdat():
+    """
+    reads the potential.dat and puts the content into a list
+
+    Returns list
+    """
+    inppot = []
+    with open("potential.dat", "r", encoding="utf-8") as file2:
+        for i in file2:
+            inppot.append(i.split())
+        file2.close()
+    
+    return inppot
+    
+def schrodinger_interpol():
+    """
+    interpolates the given Potential
+    saves the calculated xy points in potential.dat
+    -------
+    """
+    pot, xpot, ypot = read_schrodingerinp()
+
+    if str(pot[3][0]) == 'linear': 
+        pol1 = interpolate.interp1d(xpot, ypot, kind = "linear")
+
+    elif str(pot[3][0]) == "polynomial":
+        pol1 = interpolate.lagrange(xpot, ypot)
+
+    elif str(pot[3][0]) == "cspline":
+        pol1 = interpolate.interp1d(xpot, ypot, kind = "cubic")
+
+    else:
+        print("Error with interpolation")
+        sys.exit('Aborting')
+
+    #Create file potential.dat
+    xval1 = np.linspace(float(pot[1][0]), float(pot[1][1]), int(pot[1][2]))
+    potpoints = []
+    potxpoints = []
+
+    with open("potential.dat", "w", encoding="utf-8") as file2: 
+        for i in xval1: 
+            potpoints.append(pol1(i))
+        for i in xval1:
+            potxpoints.append(i)
+        for i, potpoint in enumerate(potpoints): 
+            file2.write(str(potxpoints[i]))
+            file2.write(" ")
+            file2.write(str(potpoint))
+            file2.write('\n')
+    file2.close()
+
+def schrodinger_solver():
     """
     solves the schroedinger equation with the interpolated potential via eigenvalue problem.
     -------
@@ -13,12 +84,7 @@ def schrodinger_solver(arg):
             energies.dat
             expvalues.dat
     """
-    a = arg + "schrodinger.inp"
-    with open(a, "r", encoding="utf-8") as file1:
-        inp = []
-        for i in file1:
-            inp.append(i.split())
-        file1.close()
+    inp, xpot, ypot = read_schrodingerinp()
 
     #def some constants and trimatrix diagonals
     mass1 = float(inp[0][0])
@@ -29,13 +95,7 @@ def schrodinger_solver(arg):
     diag = np.empty(npoints, dtype = float)
     offdiag = np.full(npoints-1, -0.5*res1)
 
-    inppot = []
-
-    b = arg + "potential.dat"
-    with open("potential.dat", "r", encoding="utf-8") as file2:
-        for i in file2:
-            inppot.append(i.split())
-        file2.close()
+    inppot = read_potentialdat()
 
     for i in range(npoints):
         inppot[i][0] = float(inppot[i][0])
@@ -46,62 +106,56 @@ def schrodinger_solver(arg):
     eigenvalues,eigenvectormatrix = linalg.eigh_tridiagonal(diag, offdiag)
 
     xval1 = np.linspace(float(inp[1][0]), float(inp[1][1]), int(inp[1][2]))
-    list1 = [[] for xval1 in range(int(inp[2][0]),int(inp[2][1]) + 1)]
-
-    abssquaremat = abs(eigenvectormatrix)**2 
-    redsquamat = np.empty((npoints,len(list1)), dtype=(float)) 
-
-    redsquamat= np.array(abssquaremat) 
-
-    normat = np.sum(redsquamat, axis=0) * delta1
-
-    for j, item in enumerate(list1):
-        for i in range(npoints):
-            item.append(eigenvectormatrix[i][j]/math.sqrt(normat[j]))
-
-    c = arg + "wavefuncs.dat"
-    with open(c, "w", encoding="utf-8") as file3:
-        for i, elem in enumerate(xval1):
-            file3.write(str(elem))
-            for j, k in enumerate(list1):
+    
+    solutionmat = eigenvectormatrix[0:int(inp[1][2]),0:int(inp[2][1])]
+    solutionmat = abs(solutionmat)**2 
+    solutionmat = np.sum(solutionmat, axis=0) * delta1
+    solution = np.empty((int(inp[1][2]),int(inp[2][1])), dtype=(float))
+    
+    for j in range(int(inp[2][1])):
+        for i in range(int(inp[1][2])):
+            solution[i][j] = eigenvectormatrix[i][j]/math.sqrt(solutionmat[j])
+    
+    with open("wavefuncs.dat", "w", encoding="utf-8") as file3:
+        for i in range(int(inp[1][2])):
+            file3.write(str(xval1[i]))
+            for j in range(int(inp[2][1])):
                 file3.write(" ")
-                file3.write(str(k[i]))
+                file3.write(str(solution[i][j]))
             file3.write("\n")
         file3.close()
 
-    d = arg + "energies.dat"
-    with open(d, "w", encoding="utf-8") as file4:
+    with open("energies.dat", "w", encoding="utf-8") as file4:
         for i in range(int(inp[2][0]) - 1,int(inp[2][1])):
             file4.write(str(eigenvalues[i]))
             file4.write("\n")
         file4.close()
 
     # calculate ortsop and sigma
-    expx = [[] for i in range(len(list1))]
-    expxx = [[] for i in range(len(list1))]
+    expx = np.empty((int(inp[1][2]),int(inp[2][1])))
+    sigma = np.empty((int(inp[1][2]),int(inp[2][1])))
 
-    for j, _ in enumerate(list1):
-        for i in range(npoints):
-            k = _[i] * xval1[i] * _[i]
-            sig = _[i] * (xval1[i])**2 * _[i]
-            expxx[j].append(sig)
-            expx[j].append(k)
+    for j in range(int(inp[2][1])):
+        for i in range(int(inp[1][2])):
+            expx[i][j] = solution[i][j]*xval1[i]*solution[i][j]
+            sigma[i][j] = solution[i][j]*(xval1[i])**2*solution[i][j]
 
-    for j, _ in enumerate(list1):
-        expx[j] = delta1 * sum(expx[j])
-        expxx[j] = delta1 * sum(expxx[j])
-
-    sigma = [] #Wurzel aus 
-    for i, _ in enumerate(expx):
-        sigma.append(math.sqrt(expxx[i] - (_)**2))
+    for j in range(int(inp[2][1])):
+        expx[:,j] = delta1 * np.sum(expx[:,j],axis=0)
+        sigma[:,j] = delta1 * np.sum(sigma[:,j],axis=0)
+    
+    for j in range(int(inp[2][1])):    
+        sigma[0][j] = math.sqrt(sigma[0][j] - (expx[0][j])**2)
 
     #first sigma then x op. value
-    e = arg + "expvalues.dat"
-    with open(e, "w", encoding="utf-8") as file5:
-        for i, _ in enumerate(sigma):
-            file5.write(str(_))
+    with open("expvalues.dat", "w", encoding="utf-8") as file5:
+        for i in range(int(inp[2][1])):
+            file5.write(str(sigma[0][i]))
             file5.write(" ")
-            file5.write(str(expx[i]))
+            file5.write(str(expx[0][i]))
             file5.write("\n")
         file5.close()
-    
+
+
+schrodinger_interpol()
+schrodinger_solver()
