@@ -1,29 +1,34 @@
+"""
+Opening the files created by schrodinger_solver
+and plotting the values
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 
 def plotread():
+
     inppot = np.loadtxt("potential.dat")
     inpwav = np.loadtxt("wavefuncs.dat")
     inpexp = np.loadtxt("expvalues.dat")
     inpeng = np.loadtxt("energies.dat")
 
-    energieslist = [] 
-    for i, _ in enumerate(inpeng): 
+    energieslist = []
+    for i, _ in enumerate(inpeng):
         energieslist.append(float(inpeng[i]))
         for j in range(2):
             inpexp[i][j] = float(inpexp[i][j])
 
-    potlist = [] 
+    potlist = []
     for i, _ in enumerate(inpwav):
         potlist.append(float(inppot[i][1]))
         for j in range(len(inpwav[0])):
             inpwav[i][j] = float(inpwav[i][j])
-        
+
         inpwav = np.array(inpwav)
         inpexp = np.array(inpexp)
-        
+
     return energieslist, inpwav, inpexp, potlist
-    
+
 
 def schrodinger_plotter():
     """
@@ -81,8 +86,8 @@ def schrodinger_plotter():
         plt.plot(inpexp[i][1] , energieslist[i], "kx")
 
     plt.title('Potential, Eigenstates, <x>')
-    plt.ylabel('Energy [Hartree]') 
-    plt.xlabel('x [Bohr]') 
+    plt.ylabel('Energy [Hartree]')
+    plt.xlabel('x [Bohr]')
 
     plt.subplot(1, 2, 2)
     plt.title('\u03C3')
@@ -100,5 +105,5 @@ def schrodinger_plotter():
     plt.xlabel('[Bohr]')
 
     plt.show()
-    
+
 schrodinger_plotter()
