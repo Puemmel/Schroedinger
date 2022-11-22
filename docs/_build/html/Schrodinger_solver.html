@@ -1,0 +1,119 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Schrodinger solver &#8212; Schrodinger documentation 18.11.2022 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '18.11.2022',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Plotter" href="Schrodinger_plotter.html" />
+    <link rel="prev" title="Welcome to Schroedinger_solver documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="schrodinger-solver">
+<h1>Schrodinger solver<a class="headerlink" href="#schrodinger-solver" title="Permalink to this headline">¶</a></h1>
+<p>In the first step, the schrodinger solver will read the schrodinger.inp,
+which needs to contain all information necessary to solve the onedimensional
+Schrodinger equation. To achieve this, please create a file called “schrodinger,inp”,
+containing the following information in that order:</p>
+<ul class="simple">
+<li>2.0 # mass</li>
+<li>-2.0 2.0 1999 # xMin xMax nPoint</li>
+<li>1 5 # first and last eigenvalue to print</li>
+<li>linear # interpolation type</li>
+<li>2 # nr. of interpolation points and xy declarations</li>
+<li>-2.0 0.0</li>
+<li>2.0 0.0</li>
+</ul>
+<p>Please Note that it is possible to add additional Interpolation points in the
+end of the file. But this needs to be declared als well with the number of Interpolation points
+and the xy declarations as in the last lines of the example data.</p>
+<p>In the second step, zt interpolates the given potential and saves the calculated xy points in
+potential.dat.
+Afterwards the schrodinger_solver will use the schrodinger.inp and the calculated potential,
+saved in the potential.dat to solve the schroedinger equation with the interpolated potential via eigenvalue problem.
+It will then return the following files:</p>
+<ul class="simple">
+<li>wavefuncs.dat</li>
+<li>energies.dat</li>
+<li>expvalues.dat</li>
+</ul>
+<p>If the Inputfile was created according to chapter Interpolator,
+the solver should create this files while the user ist calling
+the schrodinger_solver.py.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Schroedinger_solver documentation!</a></li>
+      <li>Next: <a href="Schrodinger_plotter.html" title="next chapter">Plotter</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Henrik and Eike.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/Schrodinger_solver.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
