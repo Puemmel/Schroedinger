@@ -7,7 +7,7 @@ import numpy as np
 from scipy import interpolate
 from scipy import linalg
 
-arg = ""
+arg = "Case3/"
 
 def read_schrodingerinp(arg):
     """
@@ -68,7 +68,7 @@ def schrodinger_interpol(arg):
 
     return pol1
 
-def writepotential(arg):
+def writepotential(arg) -> list:
     """
     saves the calculated xy points in potential.dat
     """
@@ -77,18 +77,20 @@ def writepotential(arg):
     xval1 = np.linspace(float(pot[1][0]), float(pot[1][1]), int(pot[1][2]))
     potpoints = []
     potxpoints = []
-
+    ppoints = []
     b_arg = arg + "potential.dat"
     with open(b_arg, "w", encoding="utf-8") as file2:
-        for i in xval1:
+        for i in xval1: 
             potpoints.append(pol1(i))
             potxpoints.append(i)
         for i, potpoint in enumerate(potpoints):
+            ppoints.append(float(potpoint))
             file2.write(str(potxpoints[i]))
             file2.write(" ")
             file2.write(str(potpoint))
             file2.write('\n')
     file2.close()
+    return ppoints
 
 def schrodinger_solver(arg):
     """
@@ -145,7 +147,6 @@ def schrodinger_solver(arg):
         sigma[0][j] = math.sqrt(sigma[0][j] - (expx[0][j])**2)
 
     return solution, eigenvalues, sigma, expx, xval1
-
 
 def writeplotdata(arg):
     """
