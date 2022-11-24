@@ -60,7 +60,7 @@ def schrodinger_interpol(arg):
         pol1 = interpolate.lagrange(xpot, ypot)
 
     elif str(pot[3][0]) == "cspline":
-        pol1 = interpolate.interp1d(xpot, ypot, kind = "cubic")
+        pol1 = interpolate.CubicSpline(xpot, ypot, bc_type='natural')
 
     else:
         print("Error with interpolation")
