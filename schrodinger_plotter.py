@@ -25,7 +25,7 @@ def plotread():
             inpwav[i][j] = float(inpwav[i][j])
 
         inpwav = np.array(inpwav)
-        inpexp = np.array(inpexp)
+        inpexp = np.array(inpexp) 
 
     return energieslist, inpwav, inpexp, potlist
 

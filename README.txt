@@ -1,6 +1,6 @@
-************
-SCHROEDINGER
-************
+*******************************
+1D-SCHROEDINGER-Equation Solver
+*******************************
 
 Package to solve the onedimensional time-independent Schroedinger Equation.
 You need to create an file called schrodinger.inp and copy it to the main folder
@@ -17,7 +17,7 @@ linear # interpolation type
 2.0 0.0
 
 To run the calculation of the potential, energies, expected Values and the wavefunctions, 
-you have to run the Schrodinger.main.py.
+you have to run schrodinger_solver.py.
 It will calculate all the values and save them in four different files:
 
 -energies.dat
@@ -25,8 +25,8 @@ It will calculate all the values and save them in four different files:
 -potential.dat
 -wavefuncs.dat
 
-After the schrodinger.main.py was executed,
-the following values can be plotted, if the Visualizer.main.py is run.
+After the schrodinger_solver.py was executed,
+the following values can be plotted, if the schrodinger_plotter.py is run.
 
 -the potential
 -the eigenvalues
@@ -34,10 +34,8 @@ the following values can be plotted, if the Visualizer.main.py is run.
 -the expected values for the eigenvalues
 
 You can find additional information in the API-Documentation within
-the docs folder. 
+the folder docs/_build/html. Open the index.html to get
+to the overview and choose the module you want to read about.
 
-
-
-The reference-files within the schroedinger folder, called RefExp
-and RefPot are used to perform the pytest for functionality testing of
-the interpolator and the solver.
+The Folders with the Cases 1-6 consist of reference-files
+to perform the pytest on the program.

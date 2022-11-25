@@ -23,7 +23,7 @@ def test_potential(test_input, expected):
     ypot = []
     for i, j in enumerate(pot):
         ypot.append(float(j[1]))
-    assert np.all((np.array(writepotential(test_input)) - ypot) < 1e-10)
+    assert np.all(np.abs((np.array(writepotential(test_input)) - ypot)) < 1e-10)
 
 directories_solver = [('Case1/', 'Case1/RefExp.dat'),('Case2/', 'Case2/RefExp.dat'),
                ('Case3/', 'Case3/RefExp.dat'),('Case4/', 'Case4/RefExp.dat'),
@@ -41,4 +41,4 @@ def test_solver(test_input, expected):
     for i, j in enumerate(pot):
         ypot.append(float(j[1]))
     solution, eigenvalues, sigma, expx, xval1  = schrodinger_solver(test_input)
-    assert np.all((np.array(expx) - ypot) < 1e-10)
+    assert np.all(np.abs((np.array(expx) - ypot)) < 1e-10)

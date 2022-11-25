@@ -1,13 +1,23 @@
+#!/usr/bin/python3
 """
 Solving the 1D schrodinger-equation
 """
+import os
+import argparse
 import sys
 import math
 import numpy as np
 from scipy import interpolate
 from scipy import linalg
 
-arg = "Case3/"
+parser = argparse.ArgumentParser()
+parser.add_argument('-p', '--path', default ='.',
+                        help = "Directory to work on")
+args = parser.parse_args()
+os.chdir(args.path)
+print(args)
+
+arg = ""
 
 def read_schrodingerinp(arg):
     """
@@ -15,6 +25,7 @@ def read_schrodingerinp(arg):
 
     Returns the content, x values, y values for the Interpolation
     """
+    
     a_arg = arg + "schrodinger.inp"
     pot = []
     with open (a_arg, "r", encoding="utf-8") as file1:
