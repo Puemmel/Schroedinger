@@ -18,6 +18,9 @@ os.chdir(args.path)
 print(args)
 
 arg = ""
+"""
+adding the argument for the testing cases
+"""
 
 def read_schrodingerinp(arg):
     """
@@ -25,7 +28,7 @@ def read_schrodingerinp(arg):
 
     Returns the content, x values, y values for the Interpolation
     """
-    
+
     a_arg = arg + "schrodinger.inp"
     pot = []
     with open (a_arg, "r", encoding="utf-8") as file1:
@@ -91,7 +94,7 @@ def writepotential(arg) -> list:
     ppoints = []
     b_arg = arg + "potential.dat"
     with open(b_arg, "w", encoding="utf-8") as file2:
-        for i in xval1: 
+        for i in xval1:
             potpoints.append(pol1(i))
             potxpoints.append(i)
         for i, potpoint in enumerate(potpoints):
