@@ -49,6 +49,9 @@ table of contents, consisting of two entries with further information regarding 
 -schrodinger_solver
 -schrodinger_plotter
 
+If you want to make changes, go to the folder /schroedinger/docs and open the .rst files
+to change them. With the command "make html" you are able to create new html files, if sphinx is installed.
+
 In order to make sure the programm calculates the correct values for
 the potential as well as the expected values, 6 different directories
 were created, containing 6 different schrodinger.inp files with
