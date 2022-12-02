@@ -40,5 +40,5 @@ def test_solver(test_input, expected):
     ypot = []
     for i, j in enumerate(pot):
         ypot.append(float(j[1]))
-    solution, eigenvalues, sigma, expx, xval1  = schrodinger_solver(test_input)
+    _, _, _, expx, _  = schrodinger_solver(test_input)
     assert np.all(np.abs((np.array(expx) - ypot)) < 1e-10)

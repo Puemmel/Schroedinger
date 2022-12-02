@@ -85,7 +85,7 @@ def writepotential(arg) -> list:
     """
     saves the calculated xy points in potential.dat
     """
-    pot, xpot, ypot = read_schrodingerinp(arg)
+    pot, _, _ = read_schrodingerinp(arg)
     pol1 = schrodinger_interpol(arg)
     xval1 = np.linspace(float(pot[1][0]), float(pot[1][1]), int(pot[1][2]))
     potpoints = []
@@ -111,7 +111,7 @@ def schrodinger_solver(arg):
 
     and calculates wavefunctions, x-operator and sigma
     """
-    inp, xpot, ypot = read_schrodingerinp(arg)
+    inp, _, _ = read_schrodingerinp(arg)
 
     #def some constants and trimatrix diagonals
     mass1 = float(inp[0][0])
@@ -167,7 +167,7 @@ def writeplotdata(arg):
             energies.dat
             expvalues.dat
     """
-    inp, xpot, ypot = read_schrodingerinp(arg)
+    inp, _, _ = read_schrodingerinp(arg)
     solution, eigenvalues, sigma, expx, xval1 = schrodinger_solver(arg)
 
     c_arg = arg + "wavefuncs.dat"
