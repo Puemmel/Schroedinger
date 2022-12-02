@@ -15,7 +15,6 @@ parser.add_argument('-p', '--path', default ='.',
                         help = "Directory to work on")
 args = parser.parse_args()
 os.chdir(args.path)
-print(args)
 
 arg = ""
 """
