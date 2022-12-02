@@ -1,6 +1,6 @@
 """
-Testing the functionality of the interpolator by
-using predefined potential files
+Testing the functionality of the schrodinger_solver by
+using predefined potential and expected values files
 """
 import numpy as np
 import pytest

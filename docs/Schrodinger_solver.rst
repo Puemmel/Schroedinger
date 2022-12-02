@@ -4,7 +4,7 @@ Schrodinger solver
 
 In the first step, the schrodinger solver will read the schrodinger.inp,
 which needs to contain all information necessary to solve the onedimensional 
-Schrodinger equation. To achieve this, please create a file called "schrodinger,inp",
+Schrodinger equation. To achieve this, a file called "schrodinger,inp" is located inside the folder Schroedinger,
 containing the following information in that order:
 
 * 2.0 # mass
@@ -15,13 +15,14 @@ containing the following information in that order:
 * -2.0 0.0
 * 2.0 0.0
 
+To calculate your own values, the parameters can be changend within the file.
 Please note that it is possible to add additional Interpolation points in the 
 end of the file. But this needs to be declared als well with the number of Interpolation points
 and the xy declarations as in the last lines of the example data. Additionally,
 line 5 needs to be modified then too, as it contains the amount of interpolation points.
 
 In the second step, the program interpolates the given potential and saves the calculated xy points in
-potential.dat. 
+potential.dat.
 Afterwards the schrodinger_solver will use the schrodinger.inp and the calculated potential,
 saved in the potential.dat, to solve the schroedinger equation with the interpolated potential via eigenvalue problem.
 It will then return the following files:
@@ -36,7 +37,7 @@ the schrodinger_solver.py.
 
 The script schrodinger_solver.py can also be called by commandline
 with the addition "-p" or "--path" to change the directory you want to work in.
-If the directory is to be changed, please make sure that it consists an file
+If the directory is to be changed, please make sure that it consists a file
 called schrodinger.inp with the necessary information as well.
 Otherwise the script will be stopped.
 

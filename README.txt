@@ -3,10 +3,7 @@
 *******************************
 
 Repository to solve the onedimensional time-independent Schroedinger Equation.
-You need to create an file called "schrodinger.inp" and save it to the main folder
-of the project, called "Schroedinger".
-
-The file needs to have the following information in this order:
+The Folder containts a file called "schrodinger.inp", which looks like this for example:
 
 2.0 # mass
 -2.0 2.0 1999 # xMin xMax nPoint
@@ -16,8 +13,9 @@ linear # interpolation type
 -2.0 0.0
 2.0 0.0
 
-To run the calculation of the potential, energies, expected values and the wavefunctions,
-you have to run the "schrodinger_solver.py".
+If you want to calculate your own values, you can change the parameters.
+The points and the type of interpolation of the potential are given in the last lines of Schrodinger.inp.
+To solve the schrodinger equation you have to run the "schrodinger_solver.py".
 It will calculate all the values and save them in four different files:
 
 -energies.dat
@@ -31,7 +29,7 @@ that the directory you plan to work in needs to contain an "schrodinger.inp" fil
 the information mentioned above.
 
 After the "schrodinger_solver.py" was executed,
-the following values can be plotted, if the "schrodinger_plotter.py" is run.
+the following values can be plotted, if you execute the "schrodinger_plotter.py".
 
 -the potential
 -the eigenvalues
@@ -57,4 +55,5 @@ the potential as well as the expected values, 6 different directories
 were created, containing 6 different schrodinger.inp files with
 examples. Also each directory is having a file called "RefPot" and "RefExp",
 containing the correct x- and y-values for that special case.
-It can be executed by running a "pytest".
+By executing a "pytest", 12 tests will be done, comparing the calculated results
+to the reference files.

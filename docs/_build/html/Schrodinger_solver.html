@@ -43,7 +43,7 @@
 <h1>Schrodinger solver<a class="headerlink" href="#schrodinger-solver" title="Permalink to this headline">¶</a></h1>
 <p>In the first step, the schrodinger solver will read the schrodinger.inp,
 which needs to contain all information necessary to solve the onedimensional
-Schrodinger equation. To achieve this, please create a file called “schrodinger,inp”,
+Schrodinger equation. To achieve this, a file called “schrodinger,inp” is located inside the folder Schroedinger,
 containing the following information in that order:</p>
 <ul class="simple">
 <li>2.0 # mass</li>
@@ -54,7 +54,8 @@ containing the following information in that order:</p>
 <li>-2.0 0.0</li>
 <li>2.0 0.0</li>
 </ul>
-<p>Please note that it is possible to add additional Interpolation points in the
+<p>To calculate your own values, the parameters can be changend within the file.
+Please note that it is possible to add additional Interpolation points in the
 end of the file. But this needs to be declared als well with the number of Interpolation points
 and the xy declarations as in the last lines of the example data. Additionally,
 line 5 needs to be modified then too, as it contains the amount of interpolation points.</p>
@@ -73,7 +74,7 @@ the solver should create these files while the user ist calling
 the schrodinger_solver.py.</p>
 <p>The script schrodinger_solver.py can also be called by commandline
 with the addition “-p” or “–path” to change the directory you want to work in.
-If the directory is to be changed, please make sure that it consists an file
+If the directory is to be changed, please make sure that it consists a file
 called schrodinger.inp with the necessary information as well.
 Otherwise the script will be stopped.</p>
 <p>To test the functionality of the program, six example-files were created according to
